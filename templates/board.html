@@ -1,0 +1,24 @@
+<!-- board.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>掲示板</title>
+</head>
+<body>
+    <h1>掲示板</h1>
+    <p>ようこそ、{{ username }} さん！</p>
+    <form action="/board" method="post">
+        <input type="text" name="message" placeholder="メッセージを入力してください">
+        <input type="submit" value="送信">
+    </form>
+    <h2>メッセージ一覧</h2>
+    <ul>
+        {% for index in range(messages|length) %}
+            {% set msg = messages[index] %}
+            <li>{{ msg.username }}: {{ msg.message }} <form style="display:inline" action="/board" method="post"><input type="hidden" name="delete" value="{{ index }}"><input type="submit" value="削除する"></form></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
